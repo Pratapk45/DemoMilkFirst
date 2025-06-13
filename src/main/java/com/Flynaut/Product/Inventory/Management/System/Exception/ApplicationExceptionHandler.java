@@ -20,7 +20,16 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
         return new ResponseEntity<>(structure ,HttpStatus.BAD_REQUEST);
 
+    }
 
+    @ExceptionHandler(InventoryNotFoundException.class)
+    public ResponseEntity<String> handleInventoryNotFound(InventoryNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(ProductDeletionException.class)
+    public ResponseEntity<String> handleProductDeletion(ProductDeletionException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 //    @ExceptionHandler(ProductNotFoundException.class)
 //    public ResponseEntity<String> idNotFoundExceptionHandler(ProductNotFoundException notFound)
